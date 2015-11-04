@@ -1,3 +1,7 @@
 /nbproject
 /build
 /dist/
+.classpath
+.project
+.settings
+WebContent/META-INF/MANIFEST.MF
