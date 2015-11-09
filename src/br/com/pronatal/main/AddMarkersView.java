@@ -1,4 +1,4 @@
-package imd.ufrn.br.Hello;
+package com.pronatal.main;
  
 import java.io.Serializable;
 import javax.annotation.PostConstruct; 
