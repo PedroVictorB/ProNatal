@@ -1,0 +1,25 @@
+html, body {
+	height: calc(100% - 100px); 
+}
+
+#mapa {
+	width:100%;
+	height: calc(100% - 110px);
+	position:absolute;
+	top: 50px;
+	overflow:hidden;
+	padding:0;
+}
+	
+#myCarousel {
+	width:100%;
+	height: calc(100% - 110px);
+	position:absolute;
+	top: 50px;
+	overflow:hidden;
+	padding:0;
+}
+
+.carousel-inner, .item {
+	height: 100%;
+}

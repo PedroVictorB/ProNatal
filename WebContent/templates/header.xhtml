@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+   xmlns="http://www.w3.org/1999/xhtml"   
+   xmlns:ui="http://java.sun.com/jsf/facelets">
+   <body>
+      <ui:composition> 
+		<!-- Fixed navbar -->
+		 <nav class="navbar navbar-inverse navbar-fixed-top">
+		   <div class="container" 
+		   style="box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);">
+		     <div class="navbar-header">
+		       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		         <span class="sr-only">Toggle navigation</span>
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		       </button>
+		       <a class="navbar-brand" href="#"> ProNatal </a>
+		     </div>
+		     <div id="navbar" class="collapse navbar-collapse">
+		       <ul class="nav navbar-nav">
+		         <li class="#{view.viewId == '/index.xhtml' ? 'active' : ''}"><a href="index.xhtml">Home</a></li>
+				 <li class="#{view.viewId == '/mapa.xhtml' ? 'active' : ''}"><a href="mapa.xhtml">Mapa</a></li>
+		         <li class="#{view.viewId == '/sobre.xhtml' ? 'active' : ''}"><a href="#about">Sobre</a></li>
+		         <li class="#{view.viewId == '/contato.xhtml' ? 'active' : ''}"><a href="#contact">Contato</a></li>
+		       </ul>
+		       <ul class="nav navbar-nav navbar-right">
+		        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		       </ul>
+		     </div><!--/.nav-collapse -->
+		  </div>
+		</nav>
+      </ui:composition>	
+   </body>
+</html>
