@@ -1,4 +1,4 @@
-package com.pronatal.main;
+package br.com.pronatal.main;
  
 import java.io.Serializable;
 import javax.annotation.PostConstruct; 
