@@ -31,11 +31,22 @@
                                 
                                 <h:form>
                                     <div>
-                                        <p:commandLink id="ajax" update="messages" actionListener="#{buttonView.buttonAction}">
-                                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                                        <p:commandLink id="approve" update="messages" actionListener="#{buttonView.buttonAction}">
+                                            <span class="glyphicon glyphicon-thumbs-up" title="aprovar"></span>
+                                        </p:commandLink>
+                                        
+                                        <p:commandLink id="disapprove" update="messages" actionListener="#{buttonView.buttonAction}" style="margin-left: 20px;">
+                                            <span class="glyphicon glyphicon-thumbs-down" title="desaprovar"></span>
                                         </p:commandLink>
                                     </div>
+                                    
+                                    <br/>
+                                    
+                                    <p:commandLink id="details" update="messages" actionListener="#{buttonView.buttonAction}">
+                                            Visualizar detalhes
+                                     </p:commandLink>
                                 </h:form>
+                                
                             </p:outputPanel>
                         </p:gmapInfoWindow>
                     </p:gmap>
@@ -43,17 +54,28 @@
                     <p:dialog widgetVar="dlg" showEffect="fade">
                         <h:form prependId="false">
                             <h:panelGrid columns="2">
-                                <h:outputLabel for="title" value="Title:" />
-                                <p:inputText id="title" value="#{addMarkersView.title}" />
 
+                                <h:outputLabel for="title" value="Title:" />
+                                <p:inputText id="title" value="#{addMarkersView.problem.title}" style="margin-bottom: 10px;"/>
+                                
+
+                                
+                                <h:outputLabel for="category" value="Category:" />
+                                <p:inputText id="category" value="#{addMarkersView.problem.category}" style="margin-bottom: 10px;"/>
+                                
+                                <h:outputLabel for="description" value="Description:" />
+                                <p:inputTextarea rows="10" cols="50" id="description" value="#{addMarkersView.problem.description}" />
+
+								
+								<br/>
                                 <f:facet name="footer">
-                                    <p:commandButton value="Add" actionListener="#{addMarkersView.addMarker}" update=":messages" oncomplete="markerAddComplete()" />
-                                    <p:commandButton value="Cancel" onclick="return cancel()" />
+                                    <p:commandButton value="Register" actionListener="#{addMarkersView.addMarker}" update=":messages" oncomplete="markerAddComplete()" />
+                                    <p:commandButton value="Cancel" onclick="return cancel()" style="margin-left: 10px;"/>
                                 </f:facet>
                             </h:panelGrid>
 
-                            <h:inputHidden id="lat" value="#{addMarkersView.lat}" />
-                            <h:inputHidden id="lng" value="#{addMarkersView.lng}" />
+                            <h:inputHidden id="lat" value="#{addMarkersView.problem.latitude}" />
+                            <h:inputHidden id="lng" value="#{addMarkersView.problem.longitude}" />
                         </h:form>
                     </p:dialog>
                 </div>    
