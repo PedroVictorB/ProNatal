@@ -1,4 +1,4 @@
-package br.com.pronatal.main;
+package br.com.pronatal.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,7 +20,11 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import br.com.pronatal.business.ProblemService;
+import br.com.pronatal.model.Marcador;
 import br.com.pronatal.model.Problem;
+import javax.faces.application.Application;
+import javax.faces.application.ViewHandler;
+import javax.faces.component.UIViewRoot;
 
 @ManagedBean
 @ViewScoped
@@ -50,8 +54,7 @@ public class AddMarkersView implements Serializable {
         Iterator<Problem> it = problems.iterator();
         while (it.hasNext()) {
         	Problem problem = it.next();
-        	Marker marker = new Marker(new LatLng(problem.getLatitude(), problem.getLongitude()), problem.getTitle());
-        	emptyModel.addOverlay(marker);
+        	emptyModel.addOverlay(new Marcador(new LatLng(problem.getLatitude(), problem.getLongitude()), problem.getTitle(), problem.getId()));
         }
         
     }
@@ -124,11 +127,23 @@ public class AddMarkersView implements Serializable {
     }
 
     public void onMarkerSelect(OverlaySelectEvent event) {
+        
         marker = (Marker) event.getOverlay();
+        Marcador marcador = (Marcador) event.getOverlay();
+        System.out.println(""+marcador.getIdMarcador());
     } 
 
     public void onStateChange(StateChangeEvent event) {
         LatLngBounds bounds = event.getBounds();
         int zoomLevel = event.getZoomLevel();
+    } 
+    
+    public void refresh() {  
+        FacesContext context = FacesContext.getCurrentInstance();  
+        Application application = context.getApplication();  
+        ViewHandler viewHandler = application.getViewHandler();  
+        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());  
+        context.setViewRoot(viewRoot);  
+        context.renderResponse();  
     }
 }

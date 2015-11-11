@@ -9,9 +9,10 @@ import br.com.pronatal.model.Problem;
 
 public class ProblemDAO implements IDAO<Problem>, Serializable{
 
-	private static ProblemDAO problem;
+	private static ProblemDAO problem; 
 	
 	private ArrayList<Problem> problems;
+        private int id = 0;
 	
 	private ProblemDAO () {
 		problems = new ArrayList<Problem>();
@@ -26,8 +27,9 @@ public class ProblemDAO implements IDAO<Problem>, Serializable{
 	
 	@Override
 	public boolean cadastrar(Problem a) {
-		// TODO Auto-generated method stub
+                a.setId(id);
 		problems.add(a);
+                id++;
 		return true;
 	}
 
