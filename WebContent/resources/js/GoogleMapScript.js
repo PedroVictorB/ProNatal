@@ -29,6 +29,7 @@ function markerAddComplete() {
 
     currentMarker = null;
     PF('dlg').hide();
+    location.reload();
 }
 
 function cancel() {
