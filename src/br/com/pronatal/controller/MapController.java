@@ -28,7 +28,7 @@ import javax.faces.component.UIViewRoot;
 
 @ManagedBean
 @ViewScoped
-public class AddMarkersView implements Serializable {
+public class MapController implements Serializable {
 
     private MapModel emptyModel;
     private Marker marker;
@@ -36,12 +36,16 @@ public class AddMarkersView implements Serializable {
     private Problem problem;
     private ProblemService problemService;
 
+    private int id;
     private double lat;
     private double lng;
+    
+    private int upVoteCount = 0;
+    private int downVoteCount = 0;
 
-    public AddMarkersView() {
+    public MapController() {
         problemService = new ProblemService();
-	}
+    }
     
     @PostConstruct
     public void init() {
@@ -127,10 +131,10 @@ public class AddMarkersView implements Serializable {
     }
 
     public void onMarkerSelect(OverlaySelectEvent event) {
-        
+          
         marker = (Marker) event.getOverlay();
         Marcador marcador = (Marcador) event.getOverlay();
-        System.out.println(""+marcador.getIdMarcador());
+        id = marcador.getIdMarcador();  
     } 
 
     public void onStateChange(StateChangeEvent event) {
@@ -145,5 +149,67 @@ public class AddMarkersView implements Serializable {
         UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());  
         context.setViewRoot(viewRoot);  
         context.renderResponse();  
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public void upVote(){
+        Problem p = problemService.getProblemById(id);   
+        int vote = p.getUpVote();
+        vote++;
+        p.setUpVote(vote);
+        problemService.updateProblem(p);
+        setUpVoteCount(vote);
+        System.out.println("Número de votos up do id "+p.getId()+" = "+vote);
+    }
+    
+    public void downVote(){
+        Problem p = problemService.getProblemById(id);
+        int vote = p.getDownVote();
+        vote++;
+        p.setDownVote(vote);
+        problemService.updateProblem(p);
+        setDownVoteCount(vote);
+        System.out.println("Número de votos down do id "+p.getId()+" = "+vote);
+    }
+
+    /**
+     * @return the upVoteCount
+     */
+    public int getUpVoteCount() {
+        return upVoteCount;
+    }
+
+    /**
+     * @param upVoteCount the upVoteCount to set
+     */
+    public void setUpVoteCount(int upVoteCount) {
+        this.upVoteCount = upVoteCount;
+    }
+
+    /**
+     * @return the downVoteCount
+     */
+    public int getDownVoteCount() {
+        return downVoteCount;
+    }
+
+    /**
+     * @param downVoteCount the downVoteCount to set
+     */
+    public void setDownVoteCount(int downVoteCount) {
+        this.downVoteCount = downVoteCount;
     }
 }

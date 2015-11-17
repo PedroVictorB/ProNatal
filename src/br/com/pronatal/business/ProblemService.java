@@ -21,4 +21,12 @@ public class ProblemService {
 	public ArrayList<Problem> retrieveAllProblems() {
 		return daoProblem.getAll();
 	}
+        
+        public Problem getProblemById(int id){
+            return daoProblem.getById(id);
+        }
+        
+        public boolean updateProblem(Problem a){
+            return daoProblem.atualizar(a);
+        }
 }

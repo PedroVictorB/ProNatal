@@ -16,7 +16,9 @@ public class Problem implements Serializable {
 	private String description;
 	private int numberOfFollowers;
 	private double latitude;
-    private double longitude;
+        private double longitude;
+        private int upVote = 0;
+        private int downVote = 0;
 	private ProblemStatus problemStatus;
 	public int getId() {
 		return id;
@@ -72,6 +74,34 @@ public class Problem implements Serializable {
 	public void setProblemStatus(ProblemStatus problemStatus) {
 		this.problemStatus = problemStatus;
 	}
+
+    /**
+     * @return the upVote
+     */
+    public int getUpVote() {
+        return upVote;
+    }
+
+    /**
+     * @param upVote the upVote to set
+     */
+    public void setUpVote(int upVote) {
+        this.upVote = upVote;
+    }
+
+    /**
+     * @return the downVote
+     */
+    public int getDownVote() {
+        return downVote;
+    }
+
+    /**
+     * @param downVote the downVote to set
+     */
+    public void setDownVote(int downVote) {
+        this.downVote = downVote;
+    }
 	
 	
 }
