@@ -11,7 +11,7 @@
         <ui:composition template="templates/main.xhtml">
             <ui:param name="title" value="Home" />
 
-            <ui:define name="content">				
+            <ui:define name="content">
                 <script src = "http://maps.googleapis.com/maps/api/js"></script>
                 <h:outputScript library="js" name="GoogleMapScript.js" />
                 <div class="container">
@@ -20,7 +20,18 @@
 
                 <div class="container" id="mapa">
                     
-                </div>    
+                </div>
+	           
+	           <script>
+		            <ui:repeat value="#{mapBean.loadProblems()}" var="problem">
+			           	var problem = {
+			           			latitude: #{problem.marker.latitude},
+			           			longitude: #{problem.marker.longitude},
+							}
+			           	problems.push(problem);
+					</ui:repeat>
+					initialize();
+               </script>
             </ui:define>
         </ui:composition>
     </h:body>

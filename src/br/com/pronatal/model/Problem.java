@@ -2,8 +2,6 @@ package br.com.pronatal.model;
 
 import java.io.Serializable;
 
-import org.primefaces.model.map.Marker;
-
 import br.com.pronatal.utils.ProblemStatus;
 
 public class Problem implements Serializable {
@@ -15,10 +13,11 @@ public class Problem implements Serializable {
 	private String category;
 	private String description;
 	private int numberOfFollowers;
+	private Marker marker;
 	private double latitude;
-        private double longitude;
-        private int upVote = 0;
-        private int downVote = 0;
+	private double longitude;
+	private int upVote = 0;
+	private int downVote = 0;
 	private ProblemStatus problemStatus;
 	public int getId() {
 		return id;
@@ -103,5 +102,11 @@ public class Problem implements Serializable {
         this.downVote = downVote;
     }
 	
+	public void setMarker(Marker marker) {
+		this.marker = marker;
+	}
+	public Marker getMarker() {
+		return marker;
+	}
 	
 }

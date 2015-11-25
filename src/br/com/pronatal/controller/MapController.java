@@ -20,7 +20,6 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import br.com.pronatal.business.ProblemService;
-import br.com.pronatal.model.Marcador;
 import br.com.pronatal.model.Problem;
 import javax.faces.application.Application;
 import javax.faces.application.ViewHandler;
@@ -58,7 +57,7 @@ public class MapController implements Serializable {
         Iterator<Problem> it = problems.iterator();
         while (it.hasNext()) {
         	Problem problem = it.next();
-        	emptyModel.addOverlay(new Marcador(new LatLng(problem.getLatitude(), problem.getLongitude()), problem.getTitle(), problem.getId()));
+        	//emptyModel.addOverlay(new Marcador(new LatLng(problem.getLatitude(), problem.getLongitude()), problem.getTitle(), problem.getId()));
         }
         
     }
@@ -133,8 +132,8 @@ public class MapController implements Serializable {
     public void onMarkerSelect(OverlaySelectEvent event) {
           
         marker = (Marker) event.getOverlay();
-        Marcador marcador = (Marcador) event.getOverlay();
-        id = marcador.getIdMarcador();  
+        //Marcador marcador = (Marcador) event.getOverlay();
+        //id = marcador.getIdMarcador();  
     } 
 
     public void onStateChange(StateChangeEvent event) {
