@@ -1,41 +1,9 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-var currentMarker = null;
-
-function handlePointClick(event) {
-    if (currentMarker === null) {
-        document.getElementById('lat').value = event.latLng.lat();
-        document.getElementById('lng').value = event.latLng.lng();
-
-        currentMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
-        });
-
-        PF('map').addOverlay(currentMarker);
-
-        PF('dlg').show();
-    }
+function initialize() {
+  var mapProp = {
+    center:new google.maps.LatLng(-5.8378122,-35.1989288),
+    zoom:15,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  var map=new google.maps.Map(document.getElementById("mapa"),mapProp);
 }
-
-function markerAddComplete() {
-    var title = document.getElementById('title');
-    currentMarker.setTitle(title.value);
-    title.value = "";
-
-    currentMarker = null;
-    PF('dlg').hide();
-    location.reload();
-}
-
-function cancel() {
-    PF('dlg').hide();
-    currentMarker.setMap(null);
-    currentMarker = null;
-
-    return false;
-}
+google.maps.event.addDomListener(window, 'load', initialize);
