@@ -41,7 +41,12 @@ public class ProblemDAO implements IDAO<Problem>, Serializable{
 
 	@Override
 	public boolean atualizar(Problem a) {
-		// TODO Auto-generated method stub
+		for(Problem p : problems){
+                    if(p.getId() == a.getId()){
+                        p = a;
+                        return true;
+                    }
+                }
 		return false;
 	}
 
@@ -52,8 +57,12 @@ public class ProblemDAO implements IDAO<Problem>, Serializable{
 
 	@Override
 	public Problem getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+            for(Problem p : problems){
+                if(p.getId() == id){
+                    return p;
+                }
+            }
+            return null;
 	}
 
 }

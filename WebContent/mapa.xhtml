@@ -22,21 +22,23 @@
                     <p:growl id="messages" showDetail="true"/>
 
                     <p:gmap id="gmap" center="-5.8378122,-35.1989288" zoom="15" type="HYBRID" style="width:100%;height:100%"
-                            model="#{addMarkersView.emptyModel}" onPointClick="handlePointClick(event);" widgetVar="map" fitBounds="false" >
-                        <p:ajax event="overlaySelect" listener="#{addMarkersView.onMarkerSelect}"/>
+                            model="#{mapController.emptyModel}" onPointClick="handlePointClick(event);" widgetVar="map" fitBounds="false" >
+                        <p:ajax event="overlaySelect" listener="#{mapController.onMarkerSelect}"/>
 
                         <p:gmapInfoWindow id="infoWindow">
                             <p:outputPanel style="text-align: center; display: block; margin: auto">
-                                <h:outputText value="#{addMarkersView.marker.title}" />
+                                <h:outputText value="#{mapController.marker.title}" />
                                 
                                 <h:form>
                                     <div>
-                                        <p:commandLink id="approve" update="messages" actionListener="#{buttonView.buttonAction}">
-                                            <span class="glyphicon glyphicon-thumbs-up" title="aprovar"></span>
+                                        <p:commandLink id="approve" update="upVoteCount" actionListener="#{mapController.upVote}">
+                                            <span class="glyphicon glyphicon-thumbs-up" title="aprovar"> </span>
+                                            <h:outputText id="upVoteCount" value="#{mapController.upVoteCount}"></h:outputText>
                                         </p:commandLink>
                                         
-                                        <p:commandLink id="disapprove" update="messages" actionListener="#{buttonView.buttonAction}" style="margin-left: 20px;">
-                                            <span class="glyphicon glyphicon-thumbs-down" title="desaprovar"></span>
+                                        <p:commandLink id="disapprove" update="downVoteCount" actionListener="#{mapController.downVote}" style="margin-left: 20px;">
+                                            <span class="glyphicon glyphicon-thumbs-down" title="desaprovar"> </span>
+                                            <h:outputText id="downVoteCount" value="#{mapController.downVoteCount}"></h:outputText>
                                         </p:commandLink>
                                     </div>
                                     
@@ -56,26 +58,26 @@
                             <h:panelGrid columns="2">
 
                                 <h:outputLabel for="title" value="Title:" />
-                                <p:inputText id="title" value="#{addMarkersView.problem.title}" style="margin-bottom: 10px;"/>
+                                <p:inputText id="title" value="#{mapController.problem.title}" style="margin-bottom: 10px;"/>
                                 
 
                                 
                                 <h:outputLabel for="category" value="Category:" />
-                                <p:inputText id="category" value="#{addMarkersView.problem.category}" style="margin-bottom: 10px;"/>
+                                <p:inputText id="category" value="#{mapController.problem.category}" style="margin-bottom: 10px;"/>
                                 
                                 <h:outputLabel for="description" value="Description:" />
-                                <p:inputTextarea rows="10" cols="50" id="description" value="#{addMarkersView.problem.description}" />
+                                <p:inputTextarea rows="10" cols="50" id="description" value="#{mapController.problem.description}" />
 
 								
 								<br/>
                                 <f:facet name="footer">
-                                    <p:commandButton value="Register" actionListener="#{addMarkersView.addMarker}" update=":messages" oncomplete="markerAddComplete()" />
+                                    <p:commandButton value="Register" actionListener="#{mapController.addMarker}" update=":messages" oncomplete="markerAddComplete()" />
                                     <p:commandButton value="Cancel" onclick="return cancel()" style="margin-left: 10px;"/>
                                 </f:facet>
                             </h:panelGrid>
 
-                            <h:inputHidden id="lat" value="#{addMarkersView.problem.latitude}" />
-                            <h:inputHidden id="lng" value="#{addMarkersView.problem.longitude}" />
+                            <h:inputHidden id="lat" value="#{mapController.problem.latitude}" />
+                            <h:inputHidden id="lng" value="#{mapController.problem.longitude}" />
                         </h:form>
                     </p:dialog>
                 </div>    
