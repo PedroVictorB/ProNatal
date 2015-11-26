@@ -12,26 +12,12 @@
             <ui:param name="title" value="Home" />
 
             <ui:define name="content">
-                <script src = "http://maps.googleapis.com/maps/api/js"></script>
-                <h:outputScript library="js" name="GoogleMapScript.js" />
-                <div class="container">
-                    <!--  Hack to fix map position -->
-                </div>
-
-                <div class="container mapa" id="mapa">
-                    
-                </div>
-	           
-	           <script>
-		            <ui:repeat value="#{mapBean.loadProblems()}" var="problem">
-			           	var problem = {
-			           			latitude: #{problem.marker.latitude},
-			           			longitude: #{problem.marker.longitude},
-							}
-			           	problems.push(problem);
-					</ui:repeat>
-					initialize();
-               </script>
+	    		<h:outputStylesheet name="leaflet/css/leaflet.css" target="head"/>
+         		<h:outputScript name="leaflet/js/leaflet.js" target="head" />
+         		
+           		<div id="map" class="main-map"></div>
+    	
+		    	<h:outputScript name="js/mainMap.js"/>
             </ui:define>
         </ui:composition>
     </h:body>

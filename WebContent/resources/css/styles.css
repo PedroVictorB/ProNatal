@@ -2,7 +2,7 @@ html, body {
 	height: calc(100% - 100px); 
 }
 
-.mapa {
+.main-map {
 	width:100%;
 	height: calc(100% - 110px);
 	position:absolute;
@@ -11,7 +11,7 @@ html, body {
 	padding:0;
 }
 	
-#myCarousel {
+#main-carousel {
 	width:100%;
 	height: calc(100% - 110px);
 	position:absolute;
