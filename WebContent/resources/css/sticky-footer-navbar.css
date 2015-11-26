@@ -1,8 +1,7 @@
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+  min-height: 80%;
 }
 body {
   /* Margin bottom by footer height */
@@ -15,8 +14,12 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #222222;
+  padding-top: 18px;
 }
 
+.footer p {
+	text-align: center;
+}
 
 /* Custom page CSS
 -------------------------------------------------- */
