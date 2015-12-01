@@ -4,7 +4,9 @@
 <html 
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"   
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <ui:composition> 
             <!-- Fixed navbar -->
@@ -21,15 +23,18 @@
                     </div>
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li class="#{view.viewId == '/index.xhtml' ? 'active' : ''}"><a href="index.xhtml">Home</a></li>
-                            <li class="#{view.viewId == '/mapa.xhtml' ? 'active' : ''}"><a href="mapa.xhtml">Mapa</a></li>
-                            <li class="#{view.viewId == '/sobre.xhtml' ? 'active' : ''}"><a href="#about">Sobre</a></li>
-                            <li class="#{view.viewId == '/contato.xhtml' ? 'active' : ''}"><a href="#contact">Contato</a></li>
-                            <li class="#{view.viewId == '/Postagem.xhtml' ? 'active' : ''}"><a href="postagem.xhtml">Postagem</a></li>
+                            <li class=""><a href="index.xhtml">Home</a></li>
+                            <li class=""><a href="mapa.xhtml">Mapa</a></li>
+                            <li class=""><a href="#about">Sobre</a></li>
+                            <li class=""><a href="#contact">Contato</a></li>
+                            <li class=""><a href="postagem.xhtml">Postagem</a></li>
                         </ul>
+                        
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a id="registerLink" href="#"><span class="glyphicon glyphicon-user"></span> Cadastrar</a></li>
-                            <li><a id="loginLink" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li style="display: #{user == null?'block':'none'}" ><a id="registerLink" href="#"><span class="glyphicon glyphicon-user"></span> Cadastrar</a></li>
+                            <li style="display: #{user == null?'block':'none'}" ><a id="loginLink" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li style="display: #{user != null?'block':'none'};color: white;margin-right: 10px;padding-top: 15px;">Bem vindo, #{userBean.user.name}</li>
+                            <li style="display: #{user != null?'block':'none'};padding-top: 15px;"><h:form><h:commandLink style="color: firebrick" action="#{userBean.logout()}" value=" Sair"> <span class="glyphicon glyphicon-log-out"></span></h:commandLink></h:form></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -39,17 +44,23 @@
                     <div id="login-content" class="login-content">
                         <a id="close" class="close">x</a>
                         <h3>Login</h3>
-                        <form method="post" action="login.php">
-                            <label for="username">
-                                Email:
-                                <input type="text" name="email" id="username" placeholder="Email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="required" />
+                        <h:form>
+                            <p:growl id="growl" life="2000"/>
+                            <label for="email">
+                                Email
+                                <p:inputText id="email" placeholder="Email" required="true" value="#{userBean.user.email}" validatorMessage="Email Inválido!">
+                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    <f:validateLength minimum="5"></f:validateLength>
+                                </p:inputText>
                             </label>
                             <label for="password">
-                                Senha:
-                                <input type="password" name="password" id="password" placeholder="Senha" pattern="" required="required" />
+                                <h:outputText value="Senha " />
+                                <p:password id="password" value="#{userBean.user.password}" placeholder="***********" required="true" validatorMessage="Digite a senha corretamente!">
+                                    <f:validateLength minimum="6" maximum="20"></f:validateLength>
+                                </p:password>
                             </label>
-                            <button type="submit">Entrar</button>
-                        </form>
+                            <p:commandButton class="botao_registro" action="#{userBean.login()}" value="Entrar" update="growl" ajax="false"></p:commandButton>
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -58,25 +69,46 @@
                     <div id="login-content2" class="login-content" style="">
                         <a id="close2" class="close">x</a>
                         <h3>Registro</h3>
-                        <form method="post" action="register.php">
+                        <h:form id="registerform">
+                            <p:growl id="growl" life="2000"/>
                             <label for="username">
-                                Nome
-                                <input type="text" name="username" id="username" placeholder="Nome Completo" pattern="" required="required"/>
+                                <p:outputLabel value="Nome" for="username"/>
+                                <p:inputText id="username" placeholder="Nome Completo" required="true" value="#{registerBean.user.name}" size="80" validatorMessage="Digite um nome correto!">
+                                    <f:validateRegex pattern="[a-zA-Z]+"/>
+                                    <f:validateLength minimum="3"></f:validateLength>
+                                </p:inputText>
                             </label>
                             <label for="email">
-                                Email
-                                <input type="text" name="email" id="email" placeholder="Email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="required" />
+                                <p:outputLabel value="Email" for="email"/>
+                                <p:inputText id="email" placeholder="Email" required="true" value="#{registerBean.user.email}" size="40" validatorMessage="Email Inválido!" autocomplete="true">
+                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    <f:validateLength minimum="5"></f:validateLength>
+                                </p:inputText>
+
                             </label>
                             <label for="date">
-                                Data de Nascimento<br/>
-                                <input type="date" name="date" id="username" placeholder="Data de nascimento" pattern="" required="required" />
+                                <p:outputLabel for="date" value="Data de Nascimento" />
+                                <p:calendar id="date" value="#{registerBean.user.birthDate}" effect="fade" placeholder="dd/mm/aaaa" yearRange="c-100:c" 
+                                            navigator="true" validatorMessage="Digite uma data correta!" required="true">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
                             </label>
                             <label for="password">
-                                Senha
-                                <input type="password" name="password" id="password" placeholder="Senha" pattern="" required="required" />
+                                <p:outputLabel value="Senha" for="password"/>
+                                <p:password id="password" value="#{registerBean.user.password}" feedback="true" placeholder="***********" 
+                                            promptLabel="Força da senha" weakLabel="Fraca" goodLabel="Média" strongLabel="Forte" required="true" match="password2" 
+                                            validatorMessage="Digite a senha corretamente!">
+                                    <f:validateLength minimum="6"></f:validateLength>
+                                    <f:validateLength minimum="6" maximum="20"></f:validateLength>
+                                </p:password>
+                                <p:outputLabel for="password2" value="Confirme a senha" />
+                                <p:password id="password2" value="#{registerBean.user.password}" feedback="true" placeholder="***********" 
+                                            promptLabel="Força da senha" weakLabel="Fraca" goodLabel="Média" strongLabel="Forte" required="true">
+                                    <f:validateLength minimum="6" maximum="20"></f:validateLength>
+                                </p:password>
                             </label>
-                            <button type="submit">Entrar</button>
-                        </form>
+                            <p:commandButton class="botao_registro" action="#{registerBean.register()}" value="Registrar" update="growl" ajax="false"></p:commandButton>
+                        </h:form>
                     </div>
                 </div>
             </div>
