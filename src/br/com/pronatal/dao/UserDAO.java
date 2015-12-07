@@ -23,6 +23,10 @@ public class UserDAO implements IDAO<User>, Serializable {
 
     private UserDAO() {
         users = new ArrayList<>();
+        User user = new User();
+        user.setEmail("brunomoreira@hotmail.com");
+        user.setPassword("123");
+        cadastrar(user);
     }
 
     public static UserDAO getInstance() {
