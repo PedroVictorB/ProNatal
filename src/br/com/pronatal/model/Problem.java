@@ -7,18 +7,18 @@ import br.com.pronatal.utils.ProblemStatus;
 public class Problem implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    
     private int id;
-    private int userId;
+    private User user;
     private String title;
     private String category;
     private String description;
-    private int numberOfFollowers;
     private Marker marker;
-    private double latitude;
-    private double longitude;
+    private ProblemStatus problemStatus;
+    private int numberOfFollowers;
     private int upVote = 0;
     private int downVote = 0;
-    private ProblemStatus problemStatus;
+    
     
     public Problem() {
         marker = new Marker();
@@ -32,12 +32,12 @@ public class Problem implements Serializable {
             this.id = id;
     }
 
-    public int getUserId() {
-            return userId;
+    public User getUser() {
+            return user;
     }
 
-    public void setUserId(int userId) {
-            this.userId = userId;
+    public void setUser(User user) {
+            this.user = user;
     }
 
     public String getTitle() {
@@ -78,22 +78,6 @@ public class Problem implements Serializable {
 
     public void setNumberOfFollowers(int numberOfFollowers) {
             this.numberOfFollowers = numberOfFollowers;
-    }
-
-    public double getLatitude() {
-            return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-            this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-            return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-            this.longitude = longitude;
     }
 
     public ProblemStatus getProblemStatus() {
