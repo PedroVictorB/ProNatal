@@ -106,7 +106,11 @@ function initAutocomplete() {
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -5.8378122, lng: -35.1989288},
-        zoom: 13
+        zoom: 13,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.DEFAULT,
+            position: google.maps.ControlPosition.LEFT_BOTTOM
+        }
     });
     
     google.maps.event.addListener(map, 'click', function() {
