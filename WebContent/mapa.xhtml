@@ -12,7 +12,6 @@
             <ui:param name="title" value="Home" />
             
             <ui:define name="resources">
-                <h:outputStylesheet name="css/marker.css" />
                 <script src="http://maps.googleapis.com/maps/api/js"></script>
             </ui:define>
             
@@ -26,18 +25,17 @@
                     
                     //<![CDATA[
                     for(var i = 0; i < problems.length; i++) {
-                        var latLng = new google.maps.LatLng(problems[i].marker.latitude,problems[i].marker.longitude);
-                        var content = '<div id="iw-container">' +
-                                        '<div class="iw-title">Fábrica de Porcelana da Vista Alegre</div>' +
-                                        '<div class="iw-content">' +
-                                          '<div class="iw-subTitle">História</div>' +
-                                          '<img src="images/vistalegre.jpg" alt="Fabrica de Porcelana da Vista Alegre" height="115" width="83">' +
-                                          '<p>Fundada em 1824, a Fábrica de Porcelana da Vista Alegre foi a primeira unidade industrial dedicada à produção da porcelana em Portugal. Para a fundação e sucesso deste arriscado empreendimento industrial foi determinante o espírito de persistência do seu fundador, José Ferreira Pinto Basto. Figura de destaque na sociedade portuguesa do século XIX, proprietário agrícola, comerciante audaz, incorporou sabiamente o ideário liberal do século, tendo-se tornado “o primeiro exemplo de livre iniciativa” em Portugal.</p>' +
-                                          '<div class="iw-subTitle">Contactos</div>' +
-                                          '<p>VISTA ALEGRE ATLANTIS, SA<br>3830-292 Ílhavo - Portugal<br>'+
-                                          '<br>Tel. +351 234 320 600<br>email: geral@vaa.pt<br>www: www.myvistaalegre.com</p>'+
+                        var problem = problems[i];
+                        var latLng = new google.maps.LatLng(problem.marker.latitude,problem.marker.longitude);
+                        var content = '<div class="container" style="max-width:300px;">' +
+                                        '<div class="panel panel-default">' +
+                                            '<div class="panel-heading">' +
+                                                problem.title +
+                                            '</div>' +
+                                            '<div class="panel-body">' +
+                                                problem.description +
+                                            '</div>' +
                                         '</div>' +
-                                        '<div class="iw-bottom-gradient"></div>' +
                                       '</div>';
                         createMarker(latLng, content);
                     }
