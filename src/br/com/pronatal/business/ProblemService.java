@@ -1,32 +1,32 @@
 package br.com.pronatal.business;
 
-import java.util.ArrayList;
+import br.com.pronatal.dao.DAOFactory;
 
 import br.com.pronatal.dao.IDAO;
-import br.com.pronatal.dao.ProblemDAO;
 import br.com.pronatal.model.Problem;
+import java.util.List;
 
 public class ProblemService {
 	
 	private IDAO<Problem> daoProblem;
 	
 	public ProblemService() {
-		daoProblem = ProblemDAO.getInstance();
+            daoProblem = DAOFactory.getProblemDAO();
 	}
 	
-	public void registerProblem(Problem a) {
-		daoProblem.cadastrar(a);
+	public void registerProblem(Problem problem) {
+            daoProblem.create(problem);
 	}
 	
-	public ArrayList<Problem> retrieveAllProblems() {
-		return daoProblem.getAll();
+	public List<Problem> retrieveAllProblems() {
+            return daoProblem.retrieveAll();
 	}
         
         public Problem getProblemById(int id){
-            return daoProblem.getById(id);
+            return daoProblem.retrieveById(id);
         }
         
-        public boolean updateProblem(Problem a){
-            return daoProblem.atualizar(a);
+        public void updateProblem(Problem problem){
+            daoProblem.update(problem);
         }
 }

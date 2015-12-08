@@ -5,16 +5,17 @@
  */
 package br.com.pronatal.dao; 
 
-import java.util.ArrayList; 
+import java.util.List;
 
 /**
  *
  * @author pedro
  */
-public interface IDAO <A>{
-    public boolean cadastrar(A a);
-    public boolean deletar();
-    public boolean atualizar(A a);
-    public ArrayList<A> getAll();
-    public A getById(int id);
+public interface IDAO <T> {
+    public void create(T obj);
+    public void delete();
+    public void update(T obj);
+    public T retrieve(T obj);
+    public List<T> retrieveAll();
+    public T retrieveById(int id);
 }

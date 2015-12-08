@@ -42,7 +42,9 @@ public class RegisterBean implements Serializable{
     }
     
     public String register() {
-        if(service.register(getUser())){
+        String result = "";
+        try {
+            service.register(getUser());
             System.out.println("registro: "+getUser().getEmail());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário Cadastrado!", "Bem vindo, "+getUser().getName()+"! Logue-se para usar o ProNatal!"));
             user = new User();
@@ -51,11 +53,12 @@ public class RegisterBean implements Serializable{
             user.setId(0);
             user.setName("");
             user.setPassword("");
-            return "index";
-        }else{
+            result = "index";
+        } catch (Exception ex) {
+            Logger.getLogger(RegisterBean.class.getName()).log(Level.SEVERE, null, ex);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro de cadastro", "Cadastro não pode ser feito."));
-            return "";
         }
+        return result;
     }
 
     /**
