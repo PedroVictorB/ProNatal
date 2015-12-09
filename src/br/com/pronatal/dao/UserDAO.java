@@ -58,8 +58,9 @@ public class UserDAO implements IDAO<User>, Serializable {
 
     @Override
     public User retrieve(User obj) {
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createSQLQuery(
                     "select * from user u where u.email = :email")
@@ -75,6 +76,10 @@ public class UserDAO implements IDAO<User>, Serializable {
         } catch (HibernateException e) {
             System.out.println("Retrieve exception: " + e.getMessage());
             return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
@@ -85,9 +90,10 @@ public class UserDAO implements IDAO<User>, Serializable {
 
     @Override
     public User retrieveById(int id) {
+        Session session = null;
         try {
             User l;
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             l = (User) session.load(User.class, id);
             if (l == null) {
@@ -98,6 +104,10 @@ public class UserDAO implements IDAO<User>, Serializable {
         } catch (HibernateException | UserException e) {
             System.out.println("retrieve by id exception: " + e.getMessage());
             return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 

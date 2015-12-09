@@ -30,8 +30,9 @@ public class CommentDAO implements IDAO<Comment>, Serializable {
     
     @Override
     public void create(Comment obj) {
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             session.save(obj);
             session.getTransaction().commit();
@@ -52,8 +53,9 @@ public class CommentDAO implements IDAO<Comment>, Serializable {
 
     @Override
     public Comment retrieve(Comment obj) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createSQLQuery(
                     "select * from comment c where c.id = :id")
@@ -69,28 +71,47 @@ public class CommentDAO implements IDAO<Comment>, Serializable {
         } catch (HibernateException e) {
             System.out.println("Retrieve exception: " + e.getMessage());
             return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public List<Comment> retrieveAll() {
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             List<Comment> list = session.createCriteria(Comment.class).list();
             return list;
         } catch (Exception e) {
             System.out.println("retrieve all exception: " + e.getMessage());
             return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Comment retrieveById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        Comment p = session.get(Comment.class, id);
-        return p;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+            Comment p = session.get(Comment.class, id);
+            return p;
+        } catch (Exception e) {
+            System.out.println("retrieve all exception: " + e.getMessage());
+            return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
     
 }
