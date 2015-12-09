@@ -5,10 +5,15 @@ import javax.faces.bean.ManagedBean;
 import br.com.pronatal.business.ProblemService;
 import br.com.pronatal.model.Marker;
 import br.com.pronatal.model.Problem;
+import br.com.pronatal.model.User;
+import br.com.pronatal.utils.Session;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import static java.util.Collections.list;
+import java.util.Date;
+import java.util.List;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name="problemBean")
 @SessionScoped
@@ -36,6 +41,9 @@ public class ProblemBean {
     }
     
     public void create() {
+        HttpSession session = Session.getSession();
+        problem.setUser((User)session.getAttribute("user"));
+        problem.setDate(new Date());
         problemService.registerProblem(problem);
         problem = new Problem();
     }
@@ -43,4 +51,13 @@ public class ProblemBean {
     public String retrieveAllProblems () {
         return new Gson().toJson(problemService.retrieveAllProblems());
     }
+    
+    public List<Problem> retrieveAll () {
+        return problemService.retrieveAllProblems();
+    }
+    
+    public int getNumberOfProblems() {
+        return problemService.retrieveAllProblems().size();
+    }
+            
 }

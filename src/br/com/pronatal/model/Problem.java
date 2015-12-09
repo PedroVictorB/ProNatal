@@ -3,6 +3,7 @@ package br.com.pronatal.model;
 import java.io.Serializable;
 
 import br.com.pronatal.utils.ProblemStatus;
+import java.util.Date;
 
 public class Problem implements Serializable {
     
@@ -13,6 +14,7 @@ public class Problem implements Serializable {
     private String title;
     private String category;
     private String description;
+    private Date date;
     private Marker marker;
     private ProblemStatus problemStatus;
     private int numberOfFollowers;
@@ -62,6 +64,14 @@ public class Problem implements Serializable {
 
     public void setDescription(String description) {
             this.description = description;
+    }
+    
+    public Date getDate() {
+        return date;
+    }
+    
+    public void setDate(Date date) {
+        this.date = date;
     }
     
     public Marker getMarker() {

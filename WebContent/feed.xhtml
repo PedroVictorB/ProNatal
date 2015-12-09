@@ -36,52 +36,39 @@ and open the template in the editor.
                                 </div>
                                 <div class="panel-body">
                                     <ul class="media-list">
-                                        <li class="media">
-                                            <a href="#" class="pull-left">
-                                                <img src="http://www.designbootstrap.com/livedemos/2015/03/05/twitter-feed/assets/img/1.png" alt="" class="img-circle"/>
-                                            </a>
-                                            <div class="media-body">
-                                                <span class="text-muted pull-right">
-                                                        <small class="text-muted">30 min ago</small>
-                                                </span>
-                                                <strong class="text-success">@ Rexona Kumi</strong>
-                                                <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                        Lorem ipsum dolor sit amet, <a href="#"># consectetur adipiscing </a>.
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <a href="#" class="pull-left">
-                                                <img src="http://www.designbootstrap.com/livedemos/2015/03/05/twitter-feed/assets/img/2.png" alt="" class="img-circle"/>
-                                            </a>
-                                            <div class="media-body">
-                                                <span class="text-muted pull-right">
-                                                    <small class="text-muted">30 min ago</small>
-                                                </span>
-                                                <strong class="text-success">@ John Doe</strong>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                    Lorem ipsum dolor <a href="#"># ipsum dolor </a>adipiscing elit.
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <a href="#" class="pull-left">
-                                                <img src="http://www.designbootstrap.com/livedemos/2015/03/05/twitter-feed/assets/img/3.png" alt="" class="img-circle"/>
-                                            </a>
-                                            <div class="media-body">
-                                                <span class="text-muted pull-right">
-                                                    <small class="text-muted">30 min ago</small>
-                                                </span>
-                                                <strong class="text-success">@ Madonae Jonisyi</strong>
-                                                <p>
-                                                    Lorem ipsum dolor <a href="#"># sit amet</a> sit amet, consectetur adipiscing elit.
-                                                </p>
-                                            </div>
-                                        </li>
+                                        <ui:repeat value="#{problemBean.retrieveAll()}" var="problem" varStatus="status">
+                                            <li class="media">
+                                                <a href="#" class="pull-left">
+                                                    <img src="http://www.designbootstrap.com/livedemos/2015/03/05/twitter-feed/assets/img/1.png" alt="" class="img-circle"/>
+                                                </a>
+                                                <div class="media-body">
+                                                    <span class="text-muted pull-right">
+                                                        <small class="text-muted">
+                                                            <h:outputText value="#{problem.date}">  
+                                                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00"/>  
+                                                            </h:outputText>
+                                                        </small>
+                                                    </span>
+                                                    <strong class="text-success">@ #{problem.user.name}</strong>
+                                                    <p>
+                                                        <strong>#{problem.title}</strong>
+                                                    </p>
+                                                    <p>
+                                                        #{problem.description}
+                                                    </p>
+                                                </div>
+                                            </li>
+                                            <h:form rendered="#{not status.last}">
+                                                <hr/>
+                                            </h:form>
+                                        </ui:repeat>
                                     </ul>
-                                    <span class="text-danger">237K users active</span>
+                                    <h:form rendered="#{problemBean.numberOfProblems == 0}">
+                                        <div class="alert alert-warning">
+                                            <p>Parace que ninguem postou nada ainda...</p>
+                                        </div>
+                                    </h:form>
+                                    <span class="text-danger" style="visibility: hidden">237K users active</span>
                                 </div>
                             </div>
                         </div>
