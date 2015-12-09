@@ -5,9 +5,11 @@
  */
 package br.com.pronatal.utils;
 
+import br.com.pronatal.model.Comment;
 import br.com.pronatal.model.Marker;
 import br.com.pronatal.model.Problem;
 import br.com.pronatal.model.User;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -30,6 +32,7 @@ public class HibernateUtil {
                 cfg.addAnnotatedClass(User.class);
                 cfg.addAnnotatedClass(Problem.class);
                 cfg.addAnnotatedClass(Marker.class);
+                cfg.addAnnotatedClass(Comment.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
                 SessionFactory sessionFactory = cfg.buildSessionFactory(serviceRegistry);
         	return sessionFactory;
