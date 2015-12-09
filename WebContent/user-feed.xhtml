@@ -31,7 +31,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="panel-body">
                                     <ul class="media-list">
-                                        <ui:repeat value="#{problemBean.retrieveAll()}" var="problem" varStatus="status">
+                                        <ui:repeat value="#{problemBean.retrieveProblemsByUser()}" var="problem" varStatus="status">
                                             <li class="media">
                                                 <div class="media-body">
                                                     <span class="text-muted pull-right">
@@ -71,9 +71,9 @@ and open the template in the editor.
                                             </h:form>
                                         </ui:repeat>
                                     </ul>
-                                    <h:form rendered="#{problemBean.numberOfProblems == 0}">
+                                    <h:form rendered="#{problemBean.numberOfProblemsByUser == 0}">
                                         <div class="alert alert-warning">
-                                            <p>Parace que ninguem postou nada ainda...</p>
+                                            <p>Parace que você não postou nada ainda...</p>
                                         </div>
                                     </h:form>
                                     <span class="text-danger" style="visibility: hidden">237K users active</span>

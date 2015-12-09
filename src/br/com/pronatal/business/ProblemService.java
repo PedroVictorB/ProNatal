@@ -4,6 +4,7 @@ import br.com.pronatal.dao.DAOFactory;
 
 import br.com.pronatal.dao.IDAO;
 import br.com.pronatal.model.Problem;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProblemService {
@@ -28,5 +29,17 @@ public class ProblemService {
         
         public void updateProblem(Problem problem){
             daoProblem.update(problem);
+        }
+        
+        public List<Problem> retrieveProblemsByUser(int userId) {
+            List problems = daoProblem.retrieveAll();
+            List<Problem> userProblems = new ArrayList<Problem>();
+            for(int i = 0; i < problems.size(); i++) {
+                Problem problem = (Problem) problems.get(i);
+                if (problem.getUser().getId() == userId) {
+                    userProblems.add(problem);
+                }
+            }
+            return userProblems;
         }
 }

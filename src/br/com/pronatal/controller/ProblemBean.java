@@ -63,4 +63,16 @@ public class ProblemBean {
     public int getNumberOfProblems() {
         return problemService.retrieveAllProblems().size();
     }
+    
+    public List<Problem> retrieveProblemsByUser() {
+        HttpSession session = Session.getSession();
+        User user = (User)session.getAttribute("user");
+        return problemService.retrieveProblemsByUser(user.getId());
+    }
+    
+    public int getNumberOfProblemsByUser() {
+        HttpSession session = Session.getSession();
+        User user = (User)session.getAttribute("user");
+        return problemService.retrieveProblemsByUser(user.getId()).size();
+    }
 }
