@@ -39,7 +39,7 @@ and open the template in the editor.
                                         <ui:repeat value="#{problemBean.retrieveAll()}" var="problem" varStatus="status">
                                             <li class="media">
                                                 <a href="#" class="pull-left">
-                                                    <img src="http://www.designbootstrap.com/livedemos/2015/03/05/twitter-feed/assets/img/1.png" alt="" class="img-circle"/>
+                                                    <img src="http://www.designbootstrap.com/livedemos/2015/03/05/twitter-feed/assets/img/1.png" alt="" class="img-circle" style="background-color: #888"/>
                                                 </a>
                                                 <div class="media-body">
                                                     <span class="text-muted pull-right">
@@ -56,6 +56,15 @@ and open the template in the editor.
                                                     <p>
                                                         #{problem.description}
                                                     </p>
+                                                    <p>
+                                                        <div class="notification-icon">
+                                                            <span class="glyphicon glyphicon-comment"></span>
+                                                            <span class="badge">5</span>
+                                                        </div>
+                                                    </p>
+                                                    <div class="pull-right">
+                                                        <button type="button" class="btn btn-link">Ver detalhes</button>
+                                                    </div>
                                                 </div>
                                             </li>
                                             <h:form rendered="#{not status.last}">
