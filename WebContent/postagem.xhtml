@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--	
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:body>
+        <ui:composition template="templates/main.xhtml">
+            
+            <ui:param name="title" value="Detalhes da Postagem" />
+            
+            <ui:define name="content">
+            	<div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <ui:insert name="sidebar" >
+                                <ui:include src="/templates/sidebar.xhtml" />
+                            </ui:insert>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    Detalhes da postagem
+                                </div>
+                                <div class="panel-body">
+                                    <span class="text-danger" style="visibility: hidden">237K users active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+            
+        </ui:composition>
+    </h:body>
+</html>

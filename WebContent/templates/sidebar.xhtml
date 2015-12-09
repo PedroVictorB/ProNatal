@@ -7,9 +7,9 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:body>
         <ui:composition> 
-            <ul id="sidebar" class="nav nav-pills nav-stacked" style="max-width: 200px;">
+            <ul id="sidebar" class="nav nav-pills nav-stacked" style="max-width: 200px; position:fixed;">
                 <li class="#{view.viewId == '/feed.xhtml' ? 'active' : ''}"><a href="feed.xhtml"><span class="glyphicon glyphicon-list-alt"></span> Feed de Postagens </a></li>
-                <li class="#{view.viewId == '/postagens.xhtml' ? 'active' : ''}"><a href="#"><span class="glyphicon glyphicon-list"></span>  Minhas Postagens </a></li>
+                <li class="#{view.viewId == '/user-feed.xhtml' ? 'active' : ''}"><a href="user-feed.xhtml"><span class="glyphicon glyphicon-list"></span>  Minhas Postagens </a></li>
                 <li class="#{view.viewId == '/nova-postagem.xhtml' ? 'active' : ''}"><a href="nova-postagem.xhtml"><span class="glyphicon glyphicon-plus"></span>  Nova Postagem </a></li>
                 <li class="#{view.viewId == '/perfil.xhtml' ? 'active' : ''}"><a href="#"><span class="glyphicon glyphicon-user"></span>  Meu Perfil </a></li>
                 <li class="#{view.viewId == '/notificacoes.xhtml' ? 'active' : ''}"><a href="#"><span class="glyphicon glyphicon-envelope"></span> Notificações </a></li>
