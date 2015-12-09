@@ -30,13 +30,18 @@ public class ProblemDAO implements IDAO<Problem>, Serializable{
 
     @Override
     public void create(Problem obj) {
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             session.save(obj);
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Create exception: " + e.getMessage());
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
@@ -52,8 +57,9 @@ public class ProblemDAO implements IDAO<Problem>, Serializable{
 
     @Override
     public Problem retrieve(Problem obj) {
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createSQLQuery(
                     "select * from problem p where p.id = :id")
@@ -69,28 +75,47 @@ public class ProblemDAO implements IDAO<Problem>, Serializable{
         } catch (HibernateException e) {
             System.out.println("Retrieve exception: " + e.getMessage());
             return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public List<Problem> retrieveAll() {
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             List<Problem> list = session.createCriteria(Problem.class).list();
             return list;
         } catch (Exception e) {
             System.out.println("retrieve all exception: " + e.getMessage());
             return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Problem retrieveById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        Problem p = session.get(Problem.class, id);
-        return p;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+            Problem p = session.get(Problem.class, id);
+            return p;
+        } catch (Exception e) {
+            System.out.println("retrieve all exception: " + e.getMessage());
+            return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
     
 }
