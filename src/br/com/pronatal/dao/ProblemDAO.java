@@ -38,10 +38,6 @@ public class ProblemDAO implements IDAO<Problem>, Serializable{
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Create exception: " + e.getMessage());
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 

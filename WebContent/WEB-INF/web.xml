@@ -28,4 +28,8 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/comum/paginas/erro/erro.xhtml</location>
+    </error-page>
 </web-app>
