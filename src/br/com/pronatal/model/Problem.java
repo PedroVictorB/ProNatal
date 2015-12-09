@@ -3,28 +3,48 @@ package br.com.pronatal.model;
 import java.io.Serializable;
 
 import br.com.pronatal.utils.ProblemStatus;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "problem")
 public class Problem implements Serializable {
     
-    private static final long serialVersionUID = 1L;
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    
+    @OneToOne
     private User user;
+    
+    @Column(name = "title", nullable = false, length = 50)
     private String title;
+    
+    @Column(name = "category", nullable = false, length = 30)
     private String category;
+    
+    @Column(name = "description", nullable = false, length = 300)
     private String description;
-    private Date date;
-    private Marker marker;
-    private ProblemStatus problemStatus;
+    
+    @Column(name = "number_of_followers")
     private int numberOfFollowers;
-    private int upVote = 0;
-    private int downVote = 0;
     
+    @OneToOne(cascade = CascadeType.ALL)
+    private Marker marker;
     
-    public Problem() {
-        marker = new Marker();
-    }
+    @Column(name = "date", nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date date = new Date();
+    
+    @Column(name = "up_vote")
+    private int upVote;
+    
+    @Column(name = "down_vote")
+    private int downVote;
+    
+    @Enumerated(EnumType.STRING)
+    private ProblemStatus problemStatus;
 
     public int getId() {
             return id;
@@ -33,7 +53,7 @@ public class Problem implements Serializable {
     public void setId(int id) {
             this.id = id;
     }
-
+    
     public User getUser() {
             return user;
     }

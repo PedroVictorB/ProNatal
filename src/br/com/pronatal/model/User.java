@@ -2,14 +2,33 @@ package br.com.pronatal.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
-public class User implements Serializable{
-	private int id;
-	private String name;
-	private String email;
-	private Date birthDate;
-        private Date createDate;
-	private String password;
+@Entity
+@Table(name = "user")
+public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    
+    @Column(name = "name", nullable = false, length = 80)
+    private String name;
+    
+    @Column(name = "email", unique = true, nullable = false, length = 150)
+    private String email;
+    
+    @Column(name = "birth_date", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date birthDate;
+    
+    @Column(name = "create_date", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date createDate = new Date();
+    
+    @Column(name = "password", nullable = false, length = 25)
+    private String password;
 
     /**
      * @return the id

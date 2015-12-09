@@ -19,6 +19,6 @@ public class DAOFactory implements Serializable {
     }
     
     public static IDAO<User> getUserDAO() {
-	return UserDAOMemory.getInstance();
+	return UserDAO.getInstance();
     }
 }

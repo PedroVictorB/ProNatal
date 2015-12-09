@@ -1,17 +1,22 @@
 package br.com.pronatal.model;
 
-public class Marker {
+import java.io.Serializable;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "marker")
+public class Marker implements Serializable{
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    
+    @Column(name = "latitude", nullable = false)
     private double latitude;
+    
+    @Column(name = "longitude", nullable = false)
     private double longitude;
-
-    public Marker() {
-
-    }
-
-    public Marker(double a, double b) {
-            latitude = a;
-            longitude = b;
-    }
 
     public double getLatitude() {
             return latitude;
@@ -27,5 +32,13 @@ public class Marker {
 
     public void setLongitude(double longitude) {
             this.longitude = longitude;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
