@@ -24,6 +24,6 @@ public class DAOFactory implements Serializable {
     }
     
     public static IDAO<Comment> getCommentDAO() {
-	return CommentDAOMemory.getInstance();
+	return CommentDAO.getInstance();
     }
 }

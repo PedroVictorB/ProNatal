@@ -19,6 +19,15 @@ import org.hibernate.Session;
  */
 public class CommentDAO implements IDAO<Comment>, Serializable {
 
+    private static CommentDAO instance;
+    
+    public static CommentDAO getInstance(){
+        if(instance == null){
+            return new CommentDAO();
+        }
+        return instance;
+    }
+    
     @Override
     public void create(Comment obj) {
         try {

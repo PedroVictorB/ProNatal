@@ -76,16 +76,11 @@ and open the template in the editor.
                                     <hr/>
                                     
                                     <h:form>
-
                                         <p><h:inputTextarea id="comment" value="#{commentBean.comment.comment}" pt:placeholder="Escreva seu comentário" styleClass="form-control"></h:inputTextarea></p>
-                                        <h:inputHidden value="" />
-                                        <h:inputHidden value="some text" />
                                         <h:commandButton value="Comentar" styleClass="btn btn-primary btn-sm pull-right" action="#{commentBean.create()}">
-                                            <f:ajax execute="comment" render="output" />
+                                            <f:ajax execute="comment" render="comments" />
                                             <f:param value="#{problemBean.problem.id}" name="problemId"/>
                                         </h:commandButton>
-
-                                        <h2><h:outputText id="output" value="#{commentBean.comment.comment}" /></h2>
                                     </h:form>
                                     
                                     <br/><br/>

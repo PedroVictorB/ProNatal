@@ -56,13 +56,6 @@ public class CommentBean {
     }
     
     public List<Comment> retrieveAll () {
-        ArrayList<Comment> a = new ArrayList<Comment>();
-        Comment c = new Comment();
-        c.setComment("asdadadasd");
-        User u = new User();
-        u.setName("Brunno");
-        c.setUser(u);
-        a.add(c);
-        return a;
+        return commentService.retrieveAllComment();
     }
 }
