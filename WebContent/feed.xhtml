@@ -71,7 +71,9 @@ and open the template in the editor.
                                                         </div>
                                                     </p>
                                                     <div class="pull-right">
-                                                        <button type="button" class="btn btn-link">Ver detalhes</button>
+                                                        <h:link value="Ver detalhes" outcome="postagem">
+                                                            <f:param name="id" value="#{problem.id}"></f:param>
+                                                        </h:link>
                                                     </div>
                                                 </div>
                                             </li>
