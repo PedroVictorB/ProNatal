@@ -12,12 +12,16 @@ import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.Date;
 import java.util.List;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 @ManagedBean(name="problemBean")
 @SessionScoped
 public class ProblemBean {
+    private String name;
     private Problem problem;
     private ProblemService problemService;
 
@@ -25,7 +29,7 @@ public class ProblemBean {
         problem = new Problem();
         problemService = new ProblemService();
     }
-
+    
     public void support() {
     }
 
@@ -59,5 +63,4 @@ public class ProblemBean {
     public int getNumberOfProblems() {
         return problemService.retrieveAllProblems().size();
     }
-            
 }

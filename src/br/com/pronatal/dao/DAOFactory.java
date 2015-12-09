@@ -5,6 +5,7 @@
  */
 package br.com.pronatal.dao;
 
+import br.com.pronatal.model.Comment;
 import br.com.pronatal.model.Problem;
 import br.com.pronatal.model.User;
 import java.io.Serializable;
@@ -20,5 +21,9 @@ public class DAOFactory implements Serializable {
     
     public static IDAO<User> getUserDAO() {
 	return UserDAO.getInstance();
+    }
+    
+    public static IDAO<Comment> getCommentDAO() {
+	return CommentDAO.getInstance();
     }
 }

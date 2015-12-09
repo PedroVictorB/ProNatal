@@ -11,6 +11,13 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    
+    <f:metadata>
+        <f:viewParam 
+            name="id" value="#{problemBean.problem}"
+            converter="problemConverter" converterMessage="Problema desconhecido."
+            required="true" requiredMessage="Erro ao processar requisição" />
+    </f:metadata>
     <h:body>
         <ui:composition template="templates/main.xhtml">
             
@@ -30,7 +37,74 @@ and open the template in the editor.
                                     Detalhes da postagem
                                 </div>
                                 <div class="panel-body">
-                                    <span class="text-danger" style="visibility: hidden">237K users active</span>
+                                    <div class="media">
+                                        <a href="#" class="pull-left">
+                                            <img src="http://www.designbootstrap.com/livedemos/2015/03/05/twitter-feed/assets/img/1.png" alt="" class="img-circle" style="background-color: #888"/>
+                                        </a>
+                                        <div class="media-body">
+                                            <span class="text-muted pull-right">
+                                                <small class="text-muted">
+                                                    <h:outputText value="#{problemBean.problem.date}">  
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00"/>  
+                                                    </h:outputText>
+                                                </small>
+                                            </span>
+                                            <strong class="text-success">@ #{problemBean.problem.user.name}</strong>
+                                            <p>
+                                                <strong>#{problemBean.problem.title}</strong>
+                                            </p>
+                                            <p>
+                                                #{problemBean.problem.description}
+                                            </p>
+                                            <p>
+                                                <div class="notification-icon col-md-1">
+                                                    <span class="glyphicon glyphicon-comment"></span>
+                                                    <span class="badge">5</span>
+                                                </div>
+                                                <div class="notification-icon col-md-1">
+                                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                                    <span class="badge">5</span>
+                                                </div>
+                                                <div class="notification-icon col-md-1">
+                                                    <span class="glyphicon glyphicon-thumbs-down"></span>
+                                                    <span class="badge">2</span>
+                                                </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br/><br/>
+                                    <hr/>
+                                    
+                                    <h:form>
+                                        <p><h:inputTextarea id="comment" value="#{commentBean.comment.comment}" pt:placeholder="Escreva seu comentário" styleClass="form-control"></h:inputTextarea></p>
+                                        <h:commandButton value="Comentar" styleClass="btn btn-primary btn-sm pull-right" action="#{commentBean.create()}">
+                                            <f:ajax execute="comment" render="comments" />
+                                            <f:param value="#{problemBean.problem.id}" name="problemId"/>
+                                        </h:commandButton>
+                                    </h:form>
+                                    
+                                    <br/><br/>
+                                    
+                                    <h:panelGroup id="projects">
+                                        <ul class="media-list">
+                                            <ui:repeat value="#{commentBean.retrieveAll()}" var="comment" id="comments">
+                                                <li class="media">
+                                                    <a href="#" class="pull-left">
+                                                        <img src="http://www.designbootstrap.com/livedemos/2015/03/05/twitter-feed/assets/img/1.png" alt="" class="img-circle" style="background-color: #888"/>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <span class="text-muted pull-right">
+                                                            <small class="text-muted">30 min ago</small>
+                                                        </span>
+                                                        <strong class="text-success">@ #{comment.user.name}</strong>
+                                                        <p>
+                                                            #{comment.comment}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ui:repeat>
+                                        </ul>       
+                                    </h:panelGroup>
                                 </div>
                             </div>
                         </div>

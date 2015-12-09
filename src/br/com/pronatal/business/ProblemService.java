@@ -22,7 +22,7 @@ public class ProblemService {
             return daoProblem.retrieveAll();
 	}
         
-        public Problem getProblemById(int id){
+        public Problem retrieveProblemById(int id){
             return daoProblem.retrieveById(id);
         }
         
