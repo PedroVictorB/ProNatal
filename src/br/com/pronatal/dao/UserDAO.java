@@ -59,7 +59,6 @@ public class UserDAO implements IDAO<User>, Serializable {
     @Override
     public User retrieve(User obj) {
         try {
-            User l = null;
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createSQLQuery(
@@ -97,7 +96,7 @@ public class UserDAO implements IDAO<User>, Serializable {
                 return l;
             }
         } catch (HibernateException | UserException e) {
-            System.out.println("Retrieve exception: " + e.getMessage());
+            System.out.println("retrieve by id exception: " + e.getMessage());
             return null;
         }
     }

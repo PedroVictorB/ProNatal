@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public class DAOFactory implements Serializable {
     public static IDAO<Problem> getProblemDAO() {
-	return ProblemDAOMemory.getInstance();
+	return ProblemDAO.getInstance();
     }
     
     public static IDAO<User> getUserDAO() {

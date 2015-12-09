@@ -31,7 +31,7 @@ public class Problem implements Serializable {
     private int numberOfFollowers;
     
     @OneToOne(cascade = CascadeType.ALL)
-    private Marker marker;
+    private Marker marker = new Marker();
     
     @Column(name = "date", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
