@@ -77,10 +77,8 @@ and open the template in the editor.
                                     
                                     <h:form>
                                         <p><h:inputTextarea id="comment" value="#{commentBean.comment.comment}" pt:placeholder="Escreva seu comentário" styleClass="form-control"></h:inputTextarea></p>
-                                        <h:commandButton value="Comentar" styleClass="btn btn-primary btn-sm pull-right" action="#{commentBean.create()}">
-                                            <f:ajax execute="comment" render="comments" />
-                                            <f:param value="#{problemBean.problem.id}" name="problemId"/>
-                                        </h:commandButton>
+                                        <input type="hidden" value="#{problemBean.problem.id}" name="problemId"/>
+                                        <h:commandButton value="Comentar" styleClass="btn btn-primary btn-sm pull-right" action="#{commentBean.create()}"/>
                                     </h:form>
                                     
                                     <br/><br/>
