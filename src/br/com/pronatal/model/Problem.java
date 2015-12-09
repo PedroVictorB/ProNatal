@@ -33,7 +33,7 @@ public class Problem implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Marker marker;
     
-    @Column(name = "description", nullable = false)
+    @Column(name = "date", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date date = new Date();
     
