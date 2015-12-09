@@ -31,7 +31,7 @@ public class AuthorizationFilter implements Filter, Serializable {
  
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
- 
+        
     }
  
     @Override

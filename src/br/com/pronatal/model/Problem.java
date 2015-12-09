@@ -3,26 +3,43 @@ package br.com.pronatal.model;
 import java.io.Serializable;
 
 import br.com.pronatal.utils.ProblemStatus;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "problem")
 public class Problem implements Serializable {
     
-    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    private int userId;
-    private String title;
-    private String category;
-    private String description;
-    private int numberOfFollowers;
-    private Marker marker;
-    private double latitude;
-    private double longitude;
-    private int upVote = 0;
-    private int downVote = 0;
-    private ProblemStatus problemStatus;
     
-    public Problem() {
-        marker = new Marker();
-    }
+    @OneToOne
+    private User userId;
+    
+    @Column(name = "title", nullable = false, length = 50)
+    private String title;
+    
+    @Column(name = "category", nullable = false, length = 30)
+    private String category;
+    
+    @Column(name = "description", nullable = false, length = 300)
+    private String description;
+    
+    @Column(name = "number_of_followers")
+    private int numberOfFollowers;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Marker marker;
+    
+    @Column(name = "up_vote")
+    private int upVote;
+    
+    @Column(name = "down_vote")
+    private int downVote;
+    
+    @Enumerated(EnumType.STRING)
+    private ProblemStatus problemStatus;
 
     public int getId() {
             return id;
@@ -32,11 +49,11 @@ public class Problem implements Serializable {
             this.id = id;
     }
 
-    public int getUserId() {
+    public User getUserId() {
             return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(User userId) {
             this.userId = userId;
     }
 
@@ -78,22 +95,6 @@ public class Problem implements Serializable {
 
     public void setNumberOfFollowers(int numberOfFollowers) {
             this.numberOfFollowers = numberOfFollowers;
-    }
-
-    public double getLatitude() {
-            return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-            this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-            return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-            this.longitude = longitude;
     }
 
     public ProblemStatus getProblemStatus() {
