@@ -14,12 +14,7 @@ and open the template in the editor.
     <h:body>
         <ui:composition template="templates/main.xhtml">
             
-            <ui:param name="title" value="Feed de postagens" />
-            
-            <ui:define name="resources">
-                <script src="http://maps.google.com/maps/api/js?libraries=places&amp;sensor=false"></script>
-                <h:outputStylesheet name="css/mapStyle.css"/>
-            </ui:define>
+            <ui:param name="title" value="Minhas postagens" />
             
             <ui:define name="content">
             	<div class="container-fluid">
@@ -32,15 +27,12 @@ and open the template in the editor.
                         <div class="col-md-10">
                             <div class="panel panel-info">
                                 <div class="panel-heading">
-                                        Veja o que os outros estão postando
+                                    Veja o que você postou
                                 </div>
                                 <div class="panel-body">
                                     <ul class="media-list">
                                         <ui:repeat value="#{problemBean.retrieveAll()}" var="problem" varStatus="status">
                                             <li class="media">
-                                                <a href="#" class="pull-left">
-                                                    <img src="http://www.designbootstrap.com/livedemos/2015/03/05/twitter-feed/assets/img/1.png" alt="" class="img-circle" style="background-color: #888"/>
-                                                </a>
                                                 <div class="media-body">
                                                     <span class="text-muted pull-right">
                                                         <small class="text-muted">
@@ -49,7 +41,6 @@ and open the template in the editor.
                                                             </h:outputText>
                                                         </small>
                                                     </span>
-                                                    <strong class="text-success">@ #{problem.user.name}</strong>
                                                     <p>
                                                         <strong>#{problem.title}</strong>
                                                     </p>
